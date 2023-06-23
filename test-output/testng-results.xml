@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2023-06-23T23:14:47 IST" name="Suite" finished-at="2023-06-23T23:15:37 IST" duration-ms="50125">
+    <groups>
+    </groups>
+    <test started-at="2023-06-23T23:14:47 IST" name="Test" finished-at="2023-06-23T23:15:37 IST" duration-ms="50125">
+      <class name="testcases.LoginTest">
+        <test-method is-config="true" signature="launchapplication()[pri:0, instance:testcases.LoginTest@15bb5034]" started-at="2023-06-23T23:14:47 IST" name="launchapplication" finished-at="2023-06-23T23:15:36 IST" duration-ms="49037" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launchapplication -->
+        <test-method signature="LoginIntopApplication()[pri:0, instance:testcases.LoginTest@15bb5034]" started-at="2023-06-23T23:15:36 IST" name="LoginIntopApplication" finished-at="2023-06-23T23:15:37 IST" duration-ms="867" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- LoginIntopApplication -->
+        <test-method is-config="true" signature="TearDown()[pri:0, instance:testcases.LoginTest@15bb5034]" started-at="2023-06-23T23:15:37 IST" name="TearDown" finished-at="2023-06-23T23:15:37 IST" duration-ms="187" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TearDown -->
+      </class> <!-- testcases.LoginTest -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
+</testng-results>
