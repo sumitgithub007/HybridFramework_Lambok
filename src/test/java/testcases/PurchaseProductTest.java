@@ -16,14 +16,13 @@ import testcomponents.BaseFile;
 public class PurchaseProductTest extends BaseFile {
 
 	public WebDriver driver;// This driver object is Local to this class only
-	//public Manager manager ;
+	 
 	
 	@BeforeMethod
 	public void launchapplication()   {
+		
 		driver = launchApplication();// open the webpage of Application you mentioned in GlobalData File
-	 
-	
-	}
+	 }
 
 	@Test
 	public void signUpApplication()   {
@@ -33,24 +32,30 @@ public class PurchaseProductTest extends BaseFile {
 		Click(gethomePage().getLogin_button());
 
 		refresh();
-		Click(getCartPage().getPlaceOrder());
+		
+		
+		Click(getCartPage().getSonyXperiaMob());
 		Click(getCartPage().getAddtoCart());
-		// Click(cartpage.get);
+		WaitandAcceptAlert();
 
+		Click(getCartPage().getCartPageOpen());
+		Click(getCartPage().getPlaceOrderbutton());
+		
 		Type(getCartPage().getName(), "sumit");
 		Type(getCartPage().getCountry(), "India");
 		Type(getCartPage().getCity(), "Gwalior");
 		Type(getCartPage().getCreditcard(), "4018034566789090");
 		Type(getCartPage().getMonth(), "August");
 		Type(getCartPage().getYear(), "2023");
-		Click(getCartPage().getPurchaseitem());
+		Click(getCartPage().getPurchaseItemButton());
+		
 		//Type(cartpage.getCommonlogout(), "sumit");
 
 	}
 
 	@AfterMethod
 	public void TearDown() {
-		// driver.quit();
+	 //driver.quit();
 	}
 
 }
