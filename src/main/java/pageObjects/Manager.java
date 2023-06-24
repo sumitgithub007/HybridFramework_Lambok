@@ -4,10 +4,13 @@ import java.util.Optional;
 
 public class Manager {
 
-	private static Optional<HomePage> homePage = Optional.empty();
-	private static Optional<CartPage> cartPage = Optional.empty();
+	private  Optional<HomePage> homePage = Optional.empty();
+	private  Optional<CartPage> cartPage = Optional.empty();
 
-	public  static HomePage gethomePage() {
+	/**
+	 * @return pageObject of HomePage
+	 */
+	public   HomePage gethomePage() {
 
 		return homePage.orElseGet(() -> {
 
@@ -23,7 +26,7 @@ public class Manager {
 	 * @return pageobject of CartPage
 	 * 
 	 */
-	public static CartPage getCartPage() {
+	public  CartPage getCartPage() {
 
 		return cartPage.orElseGet(() -> {
 

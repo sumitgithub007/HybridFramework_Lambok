@@ -18,6 +18,7 @@ public class HomePage  extends basePage  {
 	private By loginusername = xpath("//input[@id='loginusername']");
 	private By loginpassword = xpath("//input[@id='loginpassword']");
 	private By login_button = xpath("//div[@class='modal-footer'] //*[@onclick='logIn()']");
+	private By loginperson = id("nameofuser");
 	private By cartclick =    xpath("//*[text()='Cart']");
 	 
 	

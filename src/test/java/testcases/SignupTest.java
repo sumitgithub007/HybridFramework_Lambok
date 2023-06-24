@@ -3,45 +3,60 @@ package testcases;
 import java.io.IOException;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import lombok.SneakyThrows;
 import pageObjects.HomePage;
+import pageObjects.Manager;
 import testcomponents.BaseFile;
+import testcomponents.BrowserFactory;
 
 
  
 public class SignupTest extends BaseFile {
-
-	public HomePage homepage;
-	public WebDriver driver;//This driver object is Local to this class only
+	Manager manager;
 	
+	
+	public HomePage gethomePage()
+	{
+		return manager.gethomePage();
+	}
+	/**
+	 * driver object for current class
+	 */
+	public WebDriver driver;
+	public BrowserFactory browserFactory ;
 	
   @BeforeMethod
-  public void launchapplication() throws IOException
+  @SneakyThrows
+  public void launchWebsite() throws IOException
   {
-	  driver=launchApplication();//open the webpage of Application you mentioned in GlobalData File
-	  homepage = new HomePage(); //Initializing driver object of HomePage
-	   
+	   manager=new Manager();
+		browserFactory = BrowserFactory.getInstance();
+		browserFactory.setDriver("chrome");
+		driver = browserFactory.getDriver();
+		launchApplication(driver);
+	    
   }
 	
 	
 	@Test
 	public void signUpApplication() throws IOException, InterruptedException
 	{
-		Click(homepage.getOpenSignUpModal());
-		Type(homepage.getLoginusername(),prop.getProperty("username")); //remove hardcode data later
-		Type(homepage.getLoginpassword(),prop.getProperty("password"));
-		Click(homepage.getSignup_button());
+		Click(gethomePage().getOpenSignUpModal());
+		Type(gethomePage().getUsernamesignup(),prop.getProperty("username")); //remove hardcode data later
+		Type(gethomePage().getPasswordsignup(),prop.getProperty("password"));
+		Click(gethomePage().getSignup_button());
 		WaitandAcceptAlert();
 	}
 	
 	
-	@AfterMethod
+	@AfterClass
 	public void TearDown()
 	{
-		driver.quit();
+		browserFactory.getDriver().quit();
 	}
 	
 	

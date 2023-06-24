@@ -1,9 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Suite">
-  <test thread-count="5" name="Test">
+ <suite name="Test boot" parallel="tests" thread-count="8">
+  
+ 
+  <listeners>
+	  
+	  <listener class-name="listeners.Listeners"/>
+  </listeners>
+   <test  name="SignUpTest">
+    <classes>
+      <class name="testcases.SignupTest"/>
+    </classes>
+  </test> <!-- Test -->
+  <test  name="LoginTest">
     <classes>
       <class name="testcases.LoginTest"/>
     </classes>
   </test> <!-- Test -->
+  
+   <test   name="PurchaseProductTest">
+    <classes>
+          <class name="testcases.PurchaseProductTest"/>
+    </classes>
+  </test> <!-- Test -->
+  
+  
+  
+ 
+  
+      
 </suite> <!-- Suite -->

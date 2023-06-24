@@ -1,47 +1,59 @@
 package utilities;
 
-import java.lang.reflect.InvocationTargetException;
-import java.time.Duration;
+import static enumPackage.WaitStrategy.VISIBLE;
+
 import java.util.List;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import enumPackage.WaitStrategy;
-import static enumPackage.WaitStrategy.*;
 
 public class Reusablecomponents {
 
-	/*
-	 * public WebDriverWait wait= new WebDriverWait(driver,Duration.ofSeconds(8));
-	 * 
-	 */
 	public static WebDriver driver;
 	public static WebDriverWait wait;
 
-	public void setDriver(WebDriver driver, WebDriverWait waitnew) {
+	/**
+	 * @param driver @wait will be applied to instance variable of
+	 *               ReusableComponents class
+	 *
+	 */
+	public void setDriver(WebDriver driver, WebDriverWait wait) {
 		Reusablecomponents.driver = driver;
-		Reusablecomponents.wait = waitnew;
+		Reusablecomponents.wait = wait;
 	}
 
 	public WebElement getWebElement(By locator) {
 		return driver.findElement(locator);
 	}
 
+	/**
+	 * This method first call the wait method to check element is visible. After
+	 * that it will return webElement
+	 * 
+	 * @param strategy
+	 * @param locator
+	 * @return
+	 * 
+	 */
 	public WebElement getWebElement(WaitStrategy strategy, By locator) {
 		wait(strategy, locator);
 		return driver.findElement(locator);
 	}
 
-	public List<WebElement> getWebElements(By locator) {
+	
+	/**Return list of WebElements
+	 * @param locator
+	 * @return
+	 */
+	public List<WebElement> getWebElements(WaitStrategy strategy,By locator) {
+		wait(strategy, locator);
 		return driver.findElements(locator);
 	}
 
@@ -63,61 +75,91 @@ public class Reusablecomponents {
 	}
 
 	/**
-	 * @param accepts By locator.
-	 * It will click locator
+	 * It will perform click action
+	 * 
+	 * @param locator
+	 * 
 	 */
-	public void Click(By by) {
+	public void Click(By locator) {
 
-		getWebElement(VISIBLE, by).click();
-
-	}
-
-	public void Type(By ele, String text) {
-
-		getWebElement(VISIBLE, ele).sendKeys(text);
-		
+		getWebElement(VISIBLE, locator).click();
 
 	}
 
-	public boolean isAlertPresent()
-	{
+	/**
+	 * It will fetch text of element present on webpage
+	 * 
+	 * @param locator
+	 * 
+	 */
+	public String getTextValue(By locator) {
 
-		 boolean foundAlert = false;
-		    
-		    try {
-		        wait.until(ExpectedConditions.alertIsPresent());
-		        foundAlert = true;
-		    } catch (Exception eTO) {
-		        foundAlert = false;
-		    }
-		    return foundAlert;
-		
-			
-	}
-	
-	
-	public void WaitandAcceptAlert()   {
-		
-		
-	  if(isAlertPresent())
-	  {
-		  driver.switchTo().alert().accept();
-	  }
-		
-		
-		
-		
-		
+		return getWebElement(VISIBLE, locator).getText();
 
 	}
 
+	/**
+	 * This method will type the desired text in textbox
+	 * 
+	 * @param locator
+	 * @param text
+	 * 
+	 */
+	public void Type(By locator, String text) {
+
+		getWebElement(VISIBLE, locator).sendKeys(text);
+
+	}
+
+	public boolean isAlertPresent() {
+
+		boolean foundAlert = false;
+
+		try {
+			wait.until(ExpectedConditions.alertIsPresent());
+			foundAlert = true;
+		} catch (Exception eTO) {
+			foundAlert = false;
+		}
+		return foundAlert;
+
+	}
+
+	/**
+	 * Asserts that two Strings are equal. If they are not, an AssertionError is
+	 * thrown.
+	 * 
+	 * @param actualvalue
+	 * @param expectedvalue
+	 */
+	public void Validation(By actualvalue, String expectedvalue) {
+		Assert.assertEquals(getTextValue(actualvalue), expectedvalue);
+	}
+
+	/**
+	 * This method will check if Alert visible and will accept alert
+	 */
+	public void WaitandAcceptAlert() {
+
+		if (isAlertPresent()) {
+			driver.switchTo().alert().accept();
+		}
+
+	}
+
+	/**
+	 * Refresh the current Page
+	 */
 	public void refresh() {
 		driver.navigate().refresh();
 	}
 
+	/**
+	 * scroll down page based on pixel value
+	 */
 	public void scrollDownPage() {
 
-		 ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,350)", "");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0,350)", "");
 
 	}
 
